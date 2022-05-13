@@ -1,19 +1,17 @@
 terraform {
-  required_version = ">= 1.1.8"
+  required_version = ">= 1.0.0"
   required_providers {
-    aws = ">= 3.37"
+    aws = ">= 3"
   }
 
-  backend "s3" {
-    bucket = "ilg-jebs-tfstate"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+  cloud {
+    organization = "jfrossetto"
+    workspaces {
+      name = "ambiente-aws"
+    }
   }
 }
 
 provider "aws" {
-  profile                 = "default"
-  shared_credentials_file = "~/.aws/credentials"
-  region                  = "us-east-1"
+  region = "us-east-1"
 }
-
